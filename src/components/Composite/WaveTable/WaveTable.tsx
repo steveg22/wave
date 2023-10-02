@@ -2,7 +2,7 @@ import { SortColumn, TableProps } from '@/components/Data-Display/Table';
 import Table from '@/components/Data-Display/Table/Table';
 import Search from '@/components/Inputs/Search';
 import Pagination from '@/components/Navigation/Pagination';
-import { paginate } from '@/lib/paginate';
+import paginate from '@/lib/paginate';
 import _ from 'lodash';
 import React, { useEffect, useMemo, useState } from 'react';
 

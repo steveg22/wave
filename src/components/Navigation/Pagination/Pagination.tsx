@@ -9,12 +9,12 @@ export type PaginationProps = {
   onPageChange: (currentPage: number) => void;
 };
 
-const Pagination: React.FC<PaginationProps> = ({
+function Pagination({
   currentPage,
   pageSize = 1,
   itemCount = 1,
   onPageChange,
-}) => {
+}: PaginationProps) {
   const pageCount = Math.ceil(itemCount / pageSize);
 
   const pages: number[] = useMemo(() => {
@@ -79,8 +79,8 @@ const Pagination: React.FC<PaginationProps> = ({
         className="isolate inline-flex -space-x-px rounded-md shadow-sm"
         aria-label="Pagination"
       >
-        <a
-          href="#"
+        <button
+          type="button"
           {...(currentPage > 1 && {
             onClick: () => onPageChange(currentPage - 1),
           })}
@@ -110,7 +110,7 @@ const Pagination: React.FC<PaginationProps> = ({
               clipRule="evenodd"
             />
           </svg>
-        </a>
+        </button>
         {pages.map((page, index, arr) => (
           <React.Fragment key={page}>
             {index > 0 && arr[index] - 1 > arr[index - 1] && (
@@ -123,9 +123,9 @@ const Pagination: React.FC<PaginationProps> = ({
                 ...
               </span>
             )}
-            <a
+            <button
+              type="button"
               onClick={() => onPageChange(page)}
-              href="#"
               {...(currentPage && { 'aria-current': 'page' })}
               className={classNames(
                 'relative inline-flex items-center border px-4 py-2 text-sm font-medium focus:z-20 bg-white',
@@ -141,11 +141,11 @@ const Pagination: React.FC<PaginationProps> = ({
               )}
             >
               {page}
-            </a>
+            </button>
           </React.Fragment>
         ))}
-        <a
-          href="#"
+        <button
+          type="button"
           {...(currentPage < pageCount && {
             onClick: () => onPageChange(currentPage + 1),
           })}
@@ -175,7 +175,7 @@ const Pagination: React.FC<PaginationProps> = ({
               clipRule="evenodd"
             />
           </svg>
-        </a>
+        </button>
       </nav>
     );
   }
@@ -188,6 +188,6 @@ const Pagination: React.FC<PaginationProps> = ({
       {pageCount > 1 && renderPageNavigation()}
     </div>
   );
-};
+}
 
 export default Pagination;
