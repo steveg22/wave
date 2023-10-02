@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import Table, { TableColumn, TableProps } from './Table';
 
-type Dessert = {
+export type Dessert = {
   id: string;
   name: string;
   calories: number;
@@ -14,12 +14,13 @@ const meta = {
   component: Table,
   title: 'Data-Display/Table',
   tags: ['autodocs'],
+  excludeStories: ['desserts', 'columns'],
 } satisfies Meta<typeof Table<TableProps<Dessert>>>;
 export default meta;
 
 type Story = StoryObj<TableProps<Dessert>>;
 
-const desserts: Dessert[] = [
+export const desserts: Dessert[] = [
   {
     id: '1',
     name: 'Frozen yoghurt',
@@ -48,7 +49,7 @@ const desserts: Dessert[] = [
   },
 ];
 
-const columns: TableColumn<Dessert>[] = [
+export const columns: TableColumn<Dessert>[] = [
   {
     field: 'name',
     label: 'Dessert (100g serving)',
