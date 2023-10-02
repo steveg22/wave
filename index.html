@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/wave.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <title>Wave</title>
+    <script>
+      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+      var storageKey = 'wave-dark_theme';
+      var darkClass = 'dark';
+
+      var isDarkMode =
+        storageKey in window.localStorage
+          ? JSON.parse(window.localStorage.getItem(storageKey))
+          : window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (isDarkMode) {
+        window.localStorage.setItem(storageKey, true);
+        document.documentElement.classList.add(darkClass);
+      } else {
+        window.localStorage.setItem(storageKey, false);
+        document.documentElement.classList.remove(darkClass);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
