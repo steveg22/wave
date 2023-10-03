@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 export const Info = {
   args: {
     notification: {
-      title: 'Hello Info',
+      title: 'Info',
       type: 'info',
       id: 1,
       message: 'This is the info notification',
@@ -24,7 +24,7 @@ export const Info = {
 export const Success = {
   args: {
     notification: {
-      title: 'Hello Success',
+      title: 'Success',
       type: 'success',
       id: 2,
       message: 'This is the success notification',
@@ -35,7 +35,7 @@ export const Success = {
 export const Error = {
   args: {
     notification: {
-      title: 'Hello Error',
+      title: 'Error',
       type: 'error',
       id: 3,
       message: 'This is the error notification',
@@ -46,10 +46,22 @@ export const Error = {
 export const Warning = {
   args: {
     notification: {
-      title: 'Hello Warning',
+      title: 'Warning',
       type: 'warning',
       id: 3,
       message: 'This is the warning notification',
+    },
+  },
+} satisfies Story;
+
+export const Timed = {
+  args: {
+    notification: {
+      title: 'Timed',
+      type: 'info',
+      id: 3,
+      message: 'This is a timed notification with a 5 second duration',
+      duration: 5000,
     },
   },
 } satisfies Story;

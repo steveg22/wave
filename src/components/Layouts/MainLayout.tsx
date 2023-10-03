@@ -21,7 +21,7 @@ import { Dialog, Menu, Transition } from '@headlessui/react';
 import classNames from 'classnames';
 import React, { Fragment, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import BusinessUnitMenu from '../Composite/BusinessUnitMenu/BusinessUnitMenu';
+import BusinessUnitMenu from '../Composite/Business-Unit-Menu/BusinessUnitMenu';
 
 interface Props {
   children: React.ReactNode;

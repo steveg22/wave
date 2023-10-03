@@ -61,14 +61,14 @@ export type SwitchProps = {
   disabled?: boolean;
 };
 
-const Switch: React.FC<SwitchProps> = ({
+function Switch({
   label,
   isChecked,
   onChange,
   className = 'flex items-center justify-between py-1',
   colour = 'indigo',
   disabled = false,
-}) => {
+}: SwitchProps) {
   return (
     <UISwitch.Group as="div" className={classNames(className)}>
       <UISwitch.Label className="flex-1">{label}</UISwitch.Label>
@@ -95,6 +95,6 @@ const Switch: React.FC<SwitchProps> = ({
       </UISwitch>
     </UISwitch.Group>
   );
-};
+}
 
 export default Switch;
