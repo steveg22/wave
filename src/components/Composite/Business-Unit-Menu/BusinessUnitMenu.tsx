@@ -12,13 +12,18 @@ import Menu, {
 
 function BusinessUnitMenu() {
   const { businessUnits } = useAuth();
-  const { businessUnitId } = useParams();
+  const { businessUnitSlug } = useParams();
 
   useEffect(() => {
-    if (businessUnitId) storage.businessUnit.setBusinessUnit(businessUnitId);
-  }, [businessUnitId]);
+    if (businessUnitSlug) {
+      const decodedLabel = decodeURIComponent(businessUnitSlug);
+      const index = businessUnits.findIndex((bu) => bu.label === decodedLabel);
+      if (index !== -1)
+        storage.businessUnit.setBusinessUnit(businessUnits[index]);
+    }
+  }, [businessUnitSlug, businessUnits]);
 
-  if (!businessUnitId) return null;
+  if (!businessUnitSlug) return null;
 
   return (
     <Menu>
@@ -28,11 +33,11 @@ function BusinessUnitMenu() {
         endIcon={<ExpandDownIcon className="h-5 w-5 fill-current" />}
         className="w-full justify-between"
       >
-        {businessUnits.find((bu) => bu.id === businessUnitId)?.label}
+        {decodeURIComponent(businessUnitSlug)}
       </MenuButton>
       <MenuItems>
         {businessUnits.map(({ id, label }) => (
-          <MenuItem key={id} to={`/app/${id}`}>
+          <MenuItem key={id} to={`/app/${encodeURIComponent(label)}`}>
             {label}
           </MenuItem>
         ))}

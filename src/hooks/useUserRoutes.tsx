@@ -28,13 +28,13 @@ const superUserRoutes: RouteObject[] = [
     path: 'unassigned-entities/*',
     element: <>Unassigned Entities</>,
   },
-  { path: 'business-units/*', element: <BusinessUnitsTable/> },
+  { path: 'business-units/*', element: <BusinessUnitsTable /> },
   { path: 'users/*', element: <>Users</> },
   { path: 'routes/*', element: <>Routes</> },
 ];
 
 function BusinessUnit() {
-  const { businessUnitId } = useParams();
+  const { businessUnitSlug } = useParams();
   const { businessUnits } = useAuth();
 
   if (!businessUnits.length) {
@@ -49,7 +49,12 @@ function BusinessUnit() {
     );
   }
 
-  if (businessUnits.findIndex((bu) => bu.id === businessUnitId) === -1) {
+  if (
+    businessUnitSlug &&
+    businessUnits.findIndex(
+      (bu) => bu.label === decodeURIComponent(businessUnitSlug)
+    ) === -1
+  ) {
     return <>Unauthorised</>;
   }
 
@@ -73,6 +78,17 @@ function useUserRoutes(): RouteObject[] {
 
   const routes = useMemo(() => {
     if (!user) return [{ path: '/auth/login', element: <Login /> }];
+    const whereTo =
+      (storage.businessUnit.getBusinessUnit() &&
+        storage.businessUnit.getBusinessUnit().label) ||
+      businessUnits[0].label;
+    console.log(storage.businessUnit.getBusinessUnit());
+    console.log(
+      storage.businessUnit.getBusinessUnit() &&
+        storage.businessUnit.getBusinessUnit()
+    );
+    console.log(businessUnits[0].label);
+    console.log('where', whereTo);
 
     const redirects: RouteObject[] = [
       { path: '/', element: <Navigate replace to="/app" /> },
@@ -81,7 +97,11 @@ function useUserRoutes(): RouteObject[] {
         element: (
           <Navigate
             replace
-            to={storage.businessUnit.getBusinessUnit() || businessUnits[0].id}
+            to={encodeURIComponent(
+              (storage.businessUnit.getBusinessUnit() &&
+                storage.businessUnit.getBusinessUnit().label) ||
+                businessUnits[0].label
+            )}
           />
         ),
       },
@@ -93,7 +113,7 @@ function useUserRoutes(): RouteObject[] {
     return [
       ...redirects,
       {
-        path: '/app/:businessUnitId',
+        path: '/app/:businessUnitSlug',
         element: <BusinessUnit />,
         children: authRoutes,
       },

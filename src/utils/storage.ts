@@ -7,6 +7,11 @@ enum StorageKeys {
   BusinessUnit = 'business_unit',
 }
 
+interface BusinessUnitItem {
+  id: string;
+  label: string;
+}
+
 function getItem(key: StorageKeys) {
   return JSON.parse(
     window.localStorage.getItem(`${storagePrefix}-${key}`) as string
@@ -15,7 +20,7 @@ function getItem(key: StorageKeys) {
 
 function setItem(
   key: StorageKeys,
-  value: string | number | boolean | { [key: string]: string }
+  value: string | number | boolean | BusinessUnitItem
 ) {
   window.localStorage.setItem(`${storagePrefix}-${key}`, JSON.stringify(value));
 }
@@ -42,8 +47,9 @@ const storage = {
     removeRefreshToken: () => removeItem(StorageKeys.RefreshToken),
   },
   businessUnit: {
-    getBusinessUnit: () => getItem(StorageKeys.BusinessUnit),
-    setBusinessUnit: (businessUnit: string) =>
+    getBusinessUnit: () =>
+      getItem(StorageKeys.BusinessUnit) as BusinessUnitItem,
+    setBusinessUnit: (businessUnit: BusinessUnitItem) =>
       setItem(StorageKeys.BusinessUnit, businessUnit),
     removeBusinessUnit: () => removeItem(StorageKeys.BusinessUnit),
   },
