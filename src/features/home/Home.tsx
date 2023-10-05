@@ -8,12 +8,6 @@ import useNotifications from '@/state/hooks/useNotifications';
 import { Controller } from 'react-hook-form';
 import { z } from 'zod';
 
-// dateRange: z.date().array(),
-const startTime = new Date();
-startTime.setHours(9, 0, 0, 0);
-const endTime = new Date();
-endTime.setHours(17, 0, 0, 0);
-
 const schema = z.object({
   name: z
     .string()
@@ -25,7 +19,7 @@ const schema = z.object({
       required_error: 'Time Range is required',
       invalid_type_error: 'Time Range is required',
     })
-    .refine((val) => val[0] <= val[1], {
+    .refine((val) => val[0] < val[1], {
       message: 'Start time must come before end time',
     }),
 });

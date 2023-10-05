@@ -13,7 +13,10 @@ function getItem(key: StorageKeys) {
   );
 }
 
-function setItem(key: StorageKeys, value: string | number | boolean) {
+function setItem(
+  key: StorageKeys,
+  value: string | number | boolean | { [key: string]: string }
+) {
   window.localStorage.setItem(`${storagePrefix}-${key}`, JSON.stringify(value));
 }
 

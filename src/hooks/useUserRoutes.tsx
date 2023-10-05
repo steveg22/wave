@@ -3,6 +3,7 @@ import AuthLayout from '@/components/Layouts/AuthLayout';
 import MainLayout from '@/components/Layouts/MainLayout';
 import Login from '@/features/auth/routes/Login';
 import Home from '@/features/home/Home';
+import BusinessUnitsTable from '@/features/pages/business-units/components/BusinessUnitsTable';
 import useAuth from '@/state/hooks/useAuth';
 import storage from '@/utils/storage';
 import { Suspense, useMemo } from 'react';
@@ -27,7 +28,7 @@ const superUserRoutes: RouteObject[] = [
     path: 'unassigned-entities/*',
     element: <>Unassigned Entities</>,
   },
-  { path: 'business-units/*', element: <>Business Units</> },
+  { path: 'business-units/*', element: <BusinessUnitsTable/> },
   { path: 'users/*', element: <>Users</> },
   { path: 'routes/*', element: <>Routes</> },
 ];

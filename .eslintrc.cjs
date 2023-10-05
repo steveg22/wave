@@ -46,6 +46,7 @@ module.exports = {
         'no-plusplus': 'off',
         'react/no-array-index-key': 'off',
         'no-restricted-exports': 'off',
+        'react/prop-types': 'off',
         'import/no-extraneous-dependencies': [
           'error',
           {
